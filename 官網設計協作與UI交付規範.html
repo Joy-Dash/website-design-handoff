@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>官網設計協作與 UI 交付規範</title>
+<style>
+:root{--ink:#243c3e;--muted:#5c6d70;--accent:#286759;--line:#dce3df;--soft:#edf3ef;--paper:#fff;--bg:#f4f5f1;--warm:#faf6ed}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:28px}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.85 "Microsoft JhengHei","PingFang TC",sans-serif}a{color:var(--accent);text-underline-offset:3px}button,input,textarea{font:inherit}button{cursor:pointer;border:1px solid #bccdc4;border-radius:5px;background:white;color:var(--ink);padding:7px 13px;font-size:13px}button:hover{background:var(--soft)}a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid #bd8a43;outline-offset:4px}.shell{max-width:1360px;margin:auto;display:grid;grid-template-columns:224px minmax(0,1fr);gap:30px;padding:28px}.sidebar{position:sticky;top:28px;align-self:start}.sidebar .name{font-size:15px;font-weight:700;padding:12px 10px 18px;border-bottom:1px solid var(--line)}.sidebar nav{display:grid;gap:3px;padding:15px 0}.sidebar a{font-size:13px;text-decoration:none;color:var(--muted);padding:9px 10px;border-radius:5px}.sidebar a:hover{background:#e7eee8;color:var(--ink)}.sidebar a span{display:inline-block;width:27px;font-size:11px;color:var(--accent)}.sidebar .tools{border-top:1px solid var(--line);padding:17px 10px}.version{font-size:11px;color:var(--muted);margin-top:13px}main{min-width:0}.cover,.section{background:var(--paper);border:1px solid var(--line);border-radius:9px;padding:38px 42px;margin-bottom:22px}.cover{border-top:4px solid var(--accent);padding-top:33px}.eyebrow{font-size:12px;color:var(--accent);font-weight:700;letter-spacing:.06em}h1{font-size:32px;line-height:1.4;margin:12px 0 15px}h2{font-size:25px;line-height:1.5;margin:4px 0 12px}h3{font-size:18px;line-height:1.5;margin:27px 0 10px}h4{font-size:15px;line-height:1.6;margin:0 0 7px}p{margin:8px 0 14px}.lead{font-size:15px;color:var(--muted);margin-bottom:25px}.small{font-size:12px;color:var(--muted)}.meta{display:flex;flex-wrap:wrap;gap:6px 22px;margin-top:20px;font-size:12px;color:var(--muted)}.purpose{padding-top:18px;margin-top:20px;border-top:1px solid var(--line)}.purpose strong{font-size:14px}.purpose p{font-size:14px;color:var(--muted);margin-bottom:0}.table-scroll{overflow:auto;max-width:100%}table{width:100%;border-collapse:collapse;font-size:14px;line-height:1.8}th,td{padding:13px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}th{font-size:12px;background:var(--soft);font-weight:700;color:#3b5a4d}td:first-child{font-weight:700}th:first-child{width:24%}tr:last-child td{border-bottom:0}.callout{border-left:3px solid #789b84;background:#f2f6f0;padding:14px 18px;font-size:14px;margin:20px 0}.callout p:last-child{margin-bottom:0}.pending{background:var(--warm);border-left-color:#bc9859}.sequence{padding:17px 20px;background:var(--soft);border-radius:5px;margin:18px 0;display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;font-size:14px}.sequence b{font-weight:400;color:#6d8d7a}.duo{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;margin:18px 0}.duo>div{padding:17px 0;border-top:2px solid #becfc2}.duo p{font-size:14px;color:var(--muted)}ul,ol{padding-left:23px;margin:10px 0 15px}li{padding-left:3px;margin:5px 0}.steps{list-style:none;padding:0;counter-reset:steps}.steps>li{counter-increment:steps;display:grid;grid-template-columns:33px 1fr;gap:15px;padding:19px 0;margin:0;border-bottom:1px solid var(--line)}.steps>li:before{content:counter(steps,decimal-leading-zero);color:var(--accent);font-size:14px;font-weight:700;padding-top:2px}.steps>li:last-child{border-bottom:0}.steps h3{font-size:17px;margin:0 0 5px}.steps p{font-size:14px;color:var(--muted);margin:0}.output{display:block;font-size:12px;color:var(--accent);margin-top:7px}.branches{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:18px 0}.branch{border:1px solid #cbd9cf;border-top:3px solid var(--accent);padding:18px 16px;border-radius:4px}.branch p{font-size:13px;color:var(--muted);margin:6px 0 0}.flow-node{border:1px solid #cbd9cf;border-radius:5px;text-align:center;padding:15px 20px}.flow-node strong{font-size:15px}.flow-node p{font-size:13px;color:var(--muted);margin:3px 0 0}.flow-arrow{text-align:center;color:#6c8a78;font-size:23px;line-height:1.3;padding:8px}.merge{text-align:center;font-size:12px;color:var(--muted);margin:12px 0}.rule-index{display:flex;flex-wrap:wrap;gap:7px 18px;margin:18px 0 25px;padding:13px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}.rule-index a{font-size:12px}.rule{padding:23px 0;border-top:1px solid var(--line)}.rule h3{margin:0 0 13px}.rule dl{display:grid;grid-template-columns:112px minmax(0,1fr);gap:10px 19px;font-size:14px;margin:0}.rule dt{font-weight:700}.rule dd{margin:0;color:var(--muted)}.example{margin:17px 0 0;padding:14px 17px;background:#f6f7f3;font-size:13px}.example strong{display:block;color:var(--accent);font-size:12px;margin-bottom:5px}.prompt-top{display:flex;justify-content:space-between;align-items:center;gap:20px;margin-top:24px;margin-bottom:10px}.prompt-top h3{margin:0}.prompt{font-size:13px;line-height:1.9;white-space:pre-wrap;overflow-wrap:anywhere;font-family:inherit;background:#f5f7f3;border:1px solid var(--line);border-radius:6px;padding:23px;margin:0}.status{min-height:24px;color:var(--accent);font-size:12px;margin:5px 0}.checklist{list-style:none;padding:0}.checklist li{display:flex;gap:12px;padding:12px 0;margin:0;border-bottom:1px solid var(--line);font-size:14px}.checklist input{width:16px;height:16px;accent-color:var(--accent);margin:6px 0 0;flex-shrink:0}.checklist label{cursor:pointer}.source-list{font-size:13px}.footer{padding:0 5px 24px;font-size:12px;color:var(--muted)}.wire-pair{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin:15px 0}.wire{border:1px solid var(--line);border-radius:4px;padding:15px;min-width:0}.wire-label{font-size:12px;color:var(--accent);margin-bottom:11px}.wire-content{display:flex;gap:12px;align-items:center;min-height:115px}.wire-content.stack{flex-direction:column;text-align:center}.wire-photo{background:#e9efea;min-height:90px;display:grid;place-items:center;color:#718577;font-size:12px;flex:1;min-width:0;width:100%}.wire-copy{flex:1;min-width:0;font-size:12px}.wire-copy strong{display:block;font-size:14px}.wire-copy p{margin:5px 0}.stack .wire-photo{min-height:55px}.data-flow{border:1px solid var(--line);padding:20px;margin:20px 0;border-radius:5px}.data-source{text-align:center;padding:12px;background:var(--soft);font-size:14px}.data-targets{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.data-targets span{border:1px solid var(--line);padding:10px;text-align:center;font-size:13px}.visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+@media(max-width:1050px){.shell{grid-template-columns:190px minmax(0,1fr);gap:18px;padding:20px}.cover,.section{padding:30px}.branches{grid-template-columns:1fr}.branch{padding:14px 16px}}
+@media(max-width:760px){html{scroll-padding-top:15px}.shell{display:block;padding:14px}.sidebar{position:static}.sidebar .name{padding:8px 0 12px}.sidebar nav{display:flex;flex-wrap:wrap;gap:3px 10px;padding:10px 0}.sidebar a{padding:4px 0;font-size:12px}.sidebar a span{width:20px}.sidebar .tools{display:flex;align-items:center;gap:15px;padding:10px 0 18px;border-top:0}.version{margin:0}.cover,.section{padding:25px 21px;border-radius:6px;margin-bottom:17px}h1{font-size:27px}h2{font-size:23px}.duo,.wire-pair{grid-template-columns:1fr}.rule dl{grid-template-columns:1fr;gap:5px}.rule dd{margin-bottom:9px}.data-targets{grid-template-columns:1fr}.prompt{padding:16px;font-size:12px}th,td{padding:11px;min-width:105px}.prompt-top{align-items:flex-start}.prompt-top h3{font-size:17px}.sequence{padding:14px}.meta{gap:5px 15px}}
+@media print{@page{size:A4;margin:15mm}html{scroll-behavior:auto;scroll-padding-top:0}body{background:white;font-size:10pt}.shell{display:block;padding:0}.sidebar,.copy-button,.status{display:none}.cover,.section{border:0;border-radius:0;padding:0;margin:0 0 24px}.cover{border-top:2px solid var(--accent);padding-top:15px}.section{break-before:page}h1{font-size:24pt}h2{font-size:20pt}h3{break-after:avoid}th{background:#eef3ee}table{font-size:9pt}thead{display:table-header-group}tr,.rule,.wire-pair,.branch,.flow-node,.callout{break-inside:avoid}.table-scroll{overflow:visible}.duo p,.rule dl{font-size:10pt}.prompt{font-size:9pt;border:0;padding:0;background:white}.rule-index{display:none}.footer{font-size:9pt}.cover,.section,.wire-photo,th,.sequence{print-color-adjust:exact;-webkit-print-color-adjust:exact}}
+.catalog-link{display:inline-block;padding:12px 18px;border:1px solid var(--accent);border-radius:5px;color:var(--accent);font-weight:600;text-decoration:none}.catalog-link:hover{background:var(--pale,#eef4f0)}
+</style>
+</head>
+<body>
+<div class="shell">
+<aside class="sidebar"><div class="name">官網設計協作<br>與 UI 交付規範</div><nav aria-label="章節導覽"><a href="#prepare"><span>01</span>需求與素材準備</a><a href="#platform"><span>02</span>後台架構與配置</a><a href="#current-catalog"><span>03</span>現有模塊與頁型</a><a href="#workflow"><span>04</span>設計與開發協作流程</a><a href="#ui-rules"><span>05</span>設計轉碼的 UI 規則</a><a href="#ai-prompts"><span>06</span>給 AI 的轉碼提示詞</a></nav><div class="tools"><button type="button" onclick="window.print()">列印／存成 PDF</button><div class="version">討論版 v0.3<br>2026.10.21</div></div></aside>
+<main>
+<header class="cover"><div class="eyebrow">設計與開發協作文件</div><h1>官網設計協作與 UI 交付規範</h1><p class="lead">從客戶需求、後台配置到 Figma 轉碼，說明設計需確認的畫面、內容與互動規則，以及交付 HTML／CSS 時的共同做法。</p><div class="purpose"><strong>合作方式</strong><p>先用現有後台能力組成網站；不足時提出新的品牌樣式或模塊呈現。設計完成 Figma 並可用 AI 輔助轉成 HTML／CSS，開發接手後再處理平台程式架構、資料與功能整合。</p></div><div class="meta"><span>適用：每案新增或調整的設計</span><span>製作數量依需求確認</span><span>未定規則明確標記，不自行推定</span></div></header>
+
+<section class="section" id="prepare"><div class="eyebrow">01 / 需求與素材準備</div><h2>開始設計前，先確認網站要呈現什麼</h2><p class="lead">先整理網站用途、頁面與內容，再評估既有品牌樣式、模塊與頁型是否足夠。沒有固定的風格套數、模塊數或每種三版要求。</p><div class="table-scroll"><table><thead><tr><th scope="col">準備項目</th><th scope="col">需要確認的內容</th></tr></thead><tbody><tr><td>網站目的與對象</td><td>主要訪客、需要傳達的訊息，以及希望訪客採取的行動，例如閱讀、詢問、預約或購買。</td></tr><tr><td>網站結構</td><td>首頁、必要內頁、列表、詳情頁、主選單與頁尾入口；列出每個頁面的用途。</td></tr><tr><td>品牌與素材</td><td>Logo、品牌配色、文字、圖片、圖示、影片與授權來源；缺少的素材標記待補。</td></tr><tr><td>內容與資料</td><td>哪些內容手動填寫、哪些引用後台；有哪些必填欄位、資料量與連結。</td></tr><tr><td>操作與限制</td><td>是否需要選單、分類、展開、輪播或表單；依平台可用能力先確認。</td></tr><tr><td>本次製作範圍</td><td>逐項列出直接沿用、重新設計、需要擴充的部分，以及交付與確認時間。</td></tr></tbody></table></div><div class="callout"><strong>先提供可參考的起點：</strong>現有後台畫面、可用模塊／頁型清單、對應欄位與一組內容樣本。有可用的前台預覽或 HTML，也一併提供，方便設計辨認內容結構。</div></section>
+
+<section class="section" id="platform"><div class="eyebrow">02 / 後台架構與配置</div><h2>先定整站風格，再安排頁面與內容</h2><p class="lead">品牌樣式建立全站基準；首頁與頁面管理安排內容位置；資料管理提供能持續更新的內容。</p><div class="table-scroll"><table><thead><tr><th scope="col">功能</th><th scope="col">主要工作</th></tr></thead><tbody><tr><td>品牌樣式與配色</td><td>選整站模板與品牌顏色，統一標題、卡片、按鈕及區塊的設計語言。</td></tr><tr><td>首頁管理</td><td>新增或選取模塊，設定可用版面、內容、排序與顯示。部分必要區塊位置固定。</td></tr><tr><td>頁面管理</td><td>建立內頁，選頁型、版型、內容來源、導覽位置與連結。</td></tr><tr><td>內容資料管理</td><td>維護文章、商品、FAQ、據點等資料，供首頁、列表與適用的詳情頁引用。</td></tr><tr><td>網站基本資訊</td><td>管理 Logo、站名、聯絡方式等共用內容。頁首、頁尾與共用行動區的配置依實際後台確認。</td></tr></tbody></table></div>
+<h3>模塊、頁型與版型的區分</h3><p>首頁用模塊組成不同區段，內頁依用途選擇頁型；同一模塊或頁型可有不同版型。實際項目與畫面直接參閱下一節的來源清單。</p>
+<div class="data-flow"><div class="data-source">同一份後台資料：標題、摘要、圖片與內容</div><div class="flow-arrow" aria-hidden="true">↓</div><div class="data-targets"><span>首頁精選區</span><span>內頁列表</span><span>已支援的詳情頁</span></div></div>
+<h3>後台配置順序</h3><div class="sequence"><span>品牌樣式與配色</span><b aria-hidden="true">→</b><span>首頁配置</span><b aria-hidden="true">→</b><span>內頁配置</span><b aria-hidden="true">→</b><span>內容設定</span><b aria-hidden="true">→</b><span>預覽確認</span></div><p class="small">前台畫面、後台儲存與正式發布是不同階段。平台資料、功能與發布流程由開發確認。</p></section>
+
+<section class="section" id="current-catalog"><div class="eyebrow">03 / 現有網站架構與版型使用方式</div><h2>現有首頁模塊與前台頁型</h2>
+<p class="lead">以下整理目前的首頁模塊與前台頁型。實際版型與畫面，請開啟 Claude 版型現況參考查看。</p>
+<p><a class="catalog-link" href="https://claude.ai/artifact/QXHUH3dJ7HYR5YbSYxdAeh" target="_blank" rel="noopener noreferrer">開啟 Claude：版型現況參考 ↗</a></p>
+
+<h3>首頁模塊</h3><div class="table-wrap"><table><thead><tr><th scope="col">模塊名稱</th><th scope="col">簡易說明</th></tr></thead><tbody><tr><th scope="row">首屏主視覺</th><td>首頁開頭的主要視覺區塊，呈現網站主題與重點訊息。</td></tr><tr><th scope="row">圖文介紹</th><td>搭配圖片與文字介紹品牌、理念或服務內容。</td></tr><tr><th scope="row">數據亮點</th><td>呈現重要數字與對應說明，讓重點資訊容易閱讀。</td></tr><tr><th scope="row">卡片列表</th><td>以卡片形式整理多個項目，方便瀏覽不同內容。</td></tr><tr><th scope="row">新聞列表</th><td>在首頁整理新聞或文章，作為內容瀏覽入口。</td></tr><tr><th scope="row">流程步驟</th><td>依順序呈現流程，說明各步驟的內容。</td></tr><tr><th scope="row">FAQ 問答</th><td>以問題與回答整理常見疑問。</td></tr></tbody></table></div>
+<h3>前台頁型</h3><div class="table-wrap"><table><thead><tr><th scope="col">頁面類型</th><th scope="col">簡易說明</th></tr></thead><tbody><tr><th scope="row">一般內容頁</th><td>用於品牌介紹、關於我們等以文字與圖片說明為主的內頁。</td></tr><tr><th scope="row">文章列表頁</th><td>集中呈現文章項目，讓訪客瀏覽文章內容。</td></tr><tr><th scope="row">聯絡表單頁</th><td>呈現聯絡資訊與表單，提供訪客填寫聯絡需求。</td></tr><tr><th scope="row">FAQ 頁</th><td>集中整理常見問題與回答，方便查閱。</td></tr><tr><th scope="row">商品 / 服務列表頁</th><td>集中呈現商品或服務項目，方便瀏覽與了解。</td></tr><tr><th scope="row">據點列表頁</th><td>整理各據點資訊，方便查閱服務位置。</td></tr></tbody></table></div>
+</section>
+
+<section class="section" id="workflow"><div class="eyebrow">04 / 設計與開發協作流程</div><h2>既有能力優先，不足的部分提出新設計</h2><p class="lead">同一個網站可以同時包含套版、視覺客製與功能擴充。每個新畫面先確認內容與操作，再進入轉碼。</p><div class="flow-node"><strong>需求與網站結構確認</strong><p>整理頁面、內容、品牌方向與必要操作。</p></div><div class="flow-arrow" aria-hidden="true">↓</div><div class="branches"><div class="branch"><h4>直接沿用</h4><p>既有品牌樣式、模塊與欄位可滿足需求，配置內容與素材。</p></div><div class="branch"><h4>新增樣式／排版</h4><p>沿用內容結構，提交整站風格或個別模塊的新畫面。</p></div><div class="branch"><h4>需要功能擴充</h4><p>先列出新增欄位、模塊或互動，確認可行性與範圍後設計。</p></div></div><div class="merge">直接沿用的部分由後台配置並預覽；以下設計與轉碼步驟適用於需要新設計的部分。</div><div class="flow-arrow" aria-hidden="true">↓</div><div class="flow-node"><strong>完成 Figma，轉成可預覽的 HTML／CSS</strong><p>設計可使用 Codex 輔助，依 UI 規則檢查轉碼後結果。</p></div><div class="flow-arrow" aria-hidden="true">↓</div><div class="flow-node"><strong>開發轉換與平台整合</strong><p>經處理工具與必要修整，接入平台架構、資料與功能。</p></div><div class="flow-arrow" aria-hidden="true">↓</div><div class="flow-node"><strong>平台內的畫面確認與驗收</strong><p>檢查品牌呈現、內容替換、響應式與操作；問題回到對應階段修正。</p></div>
+<h3>新設計提交時，說明這五件事</h3><ol><li>出現在哪個頁面或區塊。</li><li>現有樣式或模塊為什麼不適合。</li><li>哪些欄位與元件沿用，哪些需要增加。</li><li>桌機、手機與互動狀態如何呈現。</li><li>哪些已確認，哪些仍需開發評估。</li></ol><div class="callout"><strong>分兩次確認畫面：</strong>設計先檢查轉碼後的 HTML／CSS；開發完成平台整合後，再共同確認實際結果。Figma 正確不代表轉碼結果已正確，靜態預覽正確也不代表平台功能已完成。</div></section>
+
+<section class="section" id="ui-rules"><div class="eyebrow">05 / 設計轉碼的 UI 規則</div><h2>先定義畫面怎麼顯示，再讓 AI 實作</h2><p class="lead">本節聚焦設計端需要交代的內容。平台語法、資料庫、正式 API、驗證管線與程式轉換由開發處理。每案應先完成欄位與畫面確認，未定項目寫「待確認」。</p>
+<nav class="rule-index" aria-label="UI 規則索引"><a href="#rule-1">元件辨識</a><a href="#rule-2">必填欄位</a><a href="#rule-3">顯示條件</a><a href="#rule-4">內容變化</a><a href="#rule-5">品牌樣式</a><a href="#rule-6">響應式</a><a href="#rule-7">互動狀態</a><a href="#rule-8">連結與入口</a><a href="#rule-9">素材</a></nav>
+<article class="rule" id="rule-1"><h3>01　模塊、元件與欄位辨識</h3><dl><dt>需要定義</dt><dd>區塊用途、版面名稱、重複項目，以及其中的文字、圖片、按鈕與互動元件。</dd><dt>設計／轉碼要求</dt><dd>Figma 與 HTML 使用一致的用途命名；保留可辨識的區塊結構。以交付對照表或簡單 HTML 註解標明用途，不自行發明平台專用標記。</dd><dt>完成確認</dt><dd>開發可以辨認整個區塊、每筆項目及各個欄位，不需猜測哪個元素要換成後台資料。</dd></dl><div class="example"><strong>描述範例</strong>服務介紹／卡片版：一個區塊標題、可重複的服務項目；每項有圖片、名稱、說明與連結。三張卡片沿用相同結構。</div></article>
+<article class="rule" id="rule-2"><h3>02　必填、選填與內容來源</h3><dl><dt>需要定義</dt><dd>每個欄位的名稱、用途、必填／選填、內容來源，以及未填時的處理。</dd><dt>設計／轉碼要求</dt><dd>依確認過的後台欄位製作，不因畫面需要自行新增資料。必填代表正式內容要求，不代表假資料可補成完成；示範值需標明。</dd><dt>完成確認</dt><dd>每個畫面元素都能對應欄位或固定裝飾；新增欄位與資料來源已另外標記。</dd></dl><div class="table-scroll" style="margin-top:17px"><table><thead><tr><th scope="col">示例欄位</th><th scope="col">要求</th><th scope="col">空值處理</th></tr></thead><tbody><tr><td>服務名稱</td><td>必填</td><td>標記缺漏並請求補充，不自動生成正式文案。</td></tr><tr><td>服務說明</td><td>選填</td><td>不顯示說明，收掉對應間距。</td></tr><tr><td>圖片</td><td>依本案確認</td><td>使用核准的缺圖策略，不擅自找外部圖片。</td></tr><tr><td>連結文字／網址</td><td>依是否開啟按鈕確認</td><td>有文字但沒有網址時，標記待補；不使用假連結冒充完成。</td></tr></tbody></table></div><p class="small">上表為填寫方式範例，非所有模塊共用的必填規格。</p></article>
+<article class="rule" id="rule-3"><h3>03　欄位顯示與缺漏內容</h3><dl><dt>需要定義</dt><dd>每個欄位在這種版面是必須顯示、條件顯示或不使用；有沒有圖片、按鈕或資料時，區塊如何變化。</dd><dt>設計／轉碼要求</dt><dd>空內容不留下標題、空框、按鈕或多餘留白。未使用欄位需註明，不默默省略；只影響顯示，不要求設計實作後台儲存邏輯。</dd><dt>完成確認</dt><dd>檢查完整資料、少一個選填欄位、沒有圖片與整段無資料等適用情況。</dd></dl><div class="example"><strong>描述範例</strong>副標題留空時不顯示，主標題與卡片之間改用單一間距；兩顆按鈕都關閉時整列收起。整段 0 筆資料是否隱藏，需依本案確認。</div></article>
+<article class="rule" id="rule-4"><h3>04　文字長度、項目筆數與排版適應</h3><dl><dt>需要定義</dt><dd>筆數的允許範圍與建議值、文字換行／截斷、卡片高度、最後一列對齊方式，以及是否需要分頁或更多入口。</dd><dt>設計／轉碼要求</dt><dd>不依賴剛好三張卡片或一行標題；不把內容轉成圖片；不以縮小字體或直接裁掉內容解決爆版。</dd><dt>完成確認</dt><dd>用本案允許的最少／最多筆數與長標題檢查；一般正文可讀，不與圖片或按鈕重疊。</dd></dl><div class="example"><strong>描述範例</strong>服務卡片在本案確認的範圍內自然換行；標題可兩行以上，卡片隨內容增高。最後一列靠左；若需要等高，明確說明按鈕對齊方式。</div></article>
+<article class="rule" id="rule-5"><h3>05　品牌配色與共用樣式</h3><dl><dt>需要定義</dt><dd>主色、輔色、背景、區塊底色、品牌文字、標題／正文及次要文字的角色；字級、圓角、陰影與間距共用規則。</dd><dt>設計／轉碼要求</dt><dd>附色彩角色對照，CSS 將共用顏色集中管理。開發提供實際變數名稱後再沿用；名稱尚未確認時標記對照需求，不自行宣稱符合平台。品牌 Logo、照片原色與第三方品牌色等例外需列出。</dd><dt>完成確認</dt><dd>主要元件風格一致，換色時文字仍可讀。新增整站風格與單一模塊新排版需區分。</dd></dl><div class="example"><strong>描述範例</strong>主要按鈕用主色、一般卡片用區塊底色、正文用閱讀文字色。LINE 的識別色若需保留，列為明確例外。</div></article>
+<article class="rule" id="rule-6"><h3>06　桌機、手機與中間寬度</h3><div class="table-scroll" style="margin:15px 0 20px"><table><thead><tr><th scope="col">RWD 確認尺寸</th><th scope="col">畫面寬度</th><th scope="col">確認重點</th></tr></thead><tbody><tr><td>桌機</td><td><strong>1440px</strong></td><td>整體排版、內容最大寬度、圖片與留白。</td></tr><tr><td>平板</td><td><strong>768px</strong></td><td>減欄、圖文順序、導覽與按鈕是否合適。</td></tr><tr><td>手機</td><td><strong>380px</strong></td><td>閱讀、圖片裁切、操作空間與橫向溢出。</td></tr></tbody></table></div><p class="small">單位為 CSS px，指畫面／瀏覽器視窗寬度，高度依內容延伸。三種尺寸皆需有可確認的畫面或預覽；未提供 Figma 稿的尺寸依約定規則實作後由設計確認。尺寸之間仍須檢查連續變化；以上不是固定 CSS 斷點。</p><dl><dt>需要定義</dt><dd>容器寬度、左右留白、欄數、閱讀順序、字級、圖片比例與裁切、導覽及按鈕排列。斷點採用平台確認值；未定時由開發試排後確認。</dd><dt>設計／轉碼要求</dt><dd>新排版先選下列一種確認方式；中間寬度自然伸縮可用文字規則，獨立結構或操作變化需補畫面／預覽。</dd><dt>完成確認</dt><dd>除了指定尺寸，也檢查連續縮放時的換欄、裁切、橫向溢出與操作；表格若需橫向捲動，限制在表格區域內。</dd></dl><div class="duo"><div><h4>先確認桌機與手機稿</h4><p>設計提供桌機＋手機畫面及規則。轉碼後檢查中間寬度與互動。</p></div><div><h4>以手機預覽完成確認</h4><p>設計提供桌機稿＋規則，AI／開發先做手機預覽，再由設計確認修正。需事先安排審查與工時。</p></div></div><div class="example"><strong>描述範例</strong>卡片由三欄減為兩欄，再減為一欄；順序不變。圖片維持指定比例，標題自然換行，手機按鈕滿寬。人物裁切、選單展開等需明確確認。</div></article>
+<article class="rule" id="rule-7"><h3>07　互動宣告與畫面狀態</h3><dl><dt>需要定義</dt><dd>元件用途、觸發方式、開啟／關閉狀態、鍵盤焦點及手機替代操作。例如 FAQ 展開、分類切換、輪播或表單。</dd><dt>設計／轉碼要求</dt><dd>先對照開發提供的可用互動清單；未支援的互動列為提案。正式表單、搜尋與功能程式由平台處理；設計交代外觀、位置及狀態，交付註記清楚。</dd><dt>完成確認</dt><dd>重要內容不只靠滑鼠移入顯示。若需 JS 展示狀態，先確認是否允許獨立 demo；未約定時提供狀態稿與說明，不夾帶正式功能。</dd></dl><div class="example"><strong>描述範例</strong>FAQ：點擊問題切換答案顯示；圖示需呈現開啟／收合差異。是否允許同時開啟多題依本案確認。聯絡表單另提供空白、錯誤與完成提示的視覺參考，實際送出由開發接入。</div></article>
+<article class="rule" id="rule-8"><h3>08　按鈕、連結與內容去向</h3><dl><dt>需要定義</dt><dd>按鈕文字、是否顯示、站內／外部／頁內連結、是否另開，以及目標頁是否存在。</dd><dt>設計／轉碼要求</dt><dd>先確認每類資料是否有詳情頁；沒有時不設計「看詳細」入口。尚未提供的目標標記待補，不能用「#」或猜測網址當成有效連結。</dd><dt>完成確認</dt><dd>每個可點項目有去向清單；不可操作與停用狀態有明確表現，不靠點擊後才發現缺少功能。</dd></dl><div class="example"><strong>描述範例</strong>據點卡若只有外部地圖連結，就提供「導航」；不自行增加據點詳情頁。內頁是否支援由開發確認。</div></article>
+<article class="rule" id="rule-9"><h3>09　圖片、圖示與素材</h3><dl><dt>需要定義</dt><dd>素材名稱、用途、比例、主體位置、手機替代圖、透明底需求、圖示選擇與授權來源。</dd><dt>設計／轉碼要求</dt><dd>交完整設計圖，也交獨立素材與可複製文案。素材格式、大小與圖示清單依開發提供的可用規格；區分設計原稿、展示素材與客戶可上傳格式。</dd><dt>完成確認</dt><dd>圖片不拉伸、主體不誤裁，缺圖策略一致；沒有未說明的外部素材、第三方嵌入或字型依賴。</dd></dl><div class="example"><strong>描述範例</strong>商品照片完整保留產品輪廓；情境圖可裁切但保留人物。若同一張圖無法適應手機，另交手機素材。圖示不得只靠固定裝飾字形代替而未註明。</div></article>
+<div class="callout pending"><strong>開發先提供的 UI 參考：</strong>本案可用欄位與必填、筆數上下限、互動清單、色彩角色與變數對照、斷點、詳情頁能力、素材與圖示限制。尚未確認的數值或能力不得直接沿用舊文件當成定案。</div></section>
+
+<section class="section" id="ai-prompts"><div class="eyebrow">06 / 給 AI 的轉碼提示詞</div><h2>讓 AI 依已確認的 UI 規則製作</h2><p class="lead">先附 Figma 連結與權限，或桌機／手機設計圖、獨立素材及文案，再貼上共用提示詞，補上本次模塊規則。Figma、Dev Mode 或 MCP 是取得設計資訊的方式，不限定一定使用其中一種。</p><div class="callout"><strong>使用前：</strong>把中括號內容換成本案資訊，刪除不適用項目。沒有資料就標「待確認」，不要讓 AI 補成看似已完成的規格。</div>
+<div class="prompt-top"><h3>提示詞一：共用轉碼要求</h3><button type="button" class="copy-button" data-copy="prompt-general">複製提示詞</button></div>
+<pre class="prompt" id="prompt-general">請依附件的 Figma／設計圖與素材，製作可供瀏覽器預覽的 HTML 與 CSS。
+
+【本次範圍】
+客戶／網站：[名稱]
+頁面與區塊：[使用位置、模塊／頁型、版面名稱]
+設計來源：[Figma 連結，或設計圖檔]
+確認方式：[桌機＋手機稿／桌機稿＋手機預覽確認]
+素材與文案：[檔案清單]
+已確認的 UI 規則：[貼上欄位、顯示、響應式及互動要求]
+
+【製作要求】
+1. 忠實依設計呈現，不擅自改風格、增加區塊或刪除資訊。
+2. 區塊、元件與重複項目保持清楚結構；文字保留為文字，圖片、按鈕及清單分開，不把整段做成圖片。
+3. 依提供的欄位對照製作。必填缺漏請列出，不自行補正式內容；選填空值、缺圖、無按鈕與空資料依規則處理，不留下空框或多餘間距。
+4. 測試確認過的最少／最多筆數與長文字，不只製作示範圖中剛好的資料量。
+5. 品牌顏色與共用樣式集中管理，標明色彩角色；沿用已提供的變數對照。尚未提供正式名稱時，列為待對照，不宣稱符合平台。
+6. 響應式以桌機 1440px、平板 768px、手機 380px 為確認寬度，依 Figma 與規則處理欄數、閱讀順序、文字、圖片裁切、留白、導覽及按鈕。缺少對應尺寸稿時，依約定製作待確認預覽並標示推定部分；另檢查尺寸間的連續變化。
+7. 使用清楚用途的命名。附上區塊、欄位、重複項目與互動的對照說明或簡單註解；不要自行發明平台專用標記。
+8. 僅製作已確認的互動外觀與狀態。正式 API、後台資料、付款、登入、表單送出與搜尋功能由開發處理。若需要 JS 展示互動，先列出需求並等待確認，不自動加入套件或第三方服務。
+9. 連結依去向清單提供；缺少目標請標記待補，不使用假網址或 # 冒充完成。不新增尚未支援的詳情頁。
+10. 素材使用提供的檔案，不自行下載替代品。素材缺漏、授權、字型或平台限制不明時，先列為問題。
+
+【交付】
+- HTML、CSS、使用素材與簡短預覽方式；實際檔案包裝依開發提供的交付範例，尚未提供時先說明採用方式。
+- UI 對照表：區塊／元件名稱、欄位、必填或選填、空值處理、互動用途。
+- 已檢查的尺寸、資料量及狀態。
+- 待確認事項，以及需由開發接入的功能。
+
+有衝突或缺少資料時，先列問題，不用猜測。完成 UI 預覽不代表完成平台整合。</pre><p class="status" id="prompt-general-status" role="status" aria-live="polite"></p>
+<div class="prompt-top"><h3>提示詞二：依 Figma 轉碼的補充規則</h3><button type="button" class="copy-button" data-copy="prompt-module">複製提示詞</button></div>
+<p class="small">搭配提示詞一使用。外觀與排版以提供的 Figma 為準；以下只補充欄位、內容變化與功能交接規則。未定項目標記待確認，不用文字重新設計畫面。</p>
+<pre class="prompt" id="prompt-module">請依提供的 Figma 製作 HTML／CSS，版面、配色、字體、間距與元件外觀以設計稿為準，不自行重新設計。
+
+【設計依據】
+Figma 連結與指定 Frame：[填入連結／名稱]
+本次範圍：[頁面、模塊或區塊名稱]
+素材與文案：[檔案清單或取得方式]
+RWD 確認寬度：桌機 1440px、平板 768px、手機 380px，以 CSS px 計。
+
+【欄位與顯示規則】
+依已確認的欄位對照製作，保留文字、圖片、清單與按鈕可替換的結構。
+- 欄位名稱／對應畫面元素：[填入]
+- 必填或選填：[填入]
+- 選填內容留空時如何顯示：[填入]
+- 沒有圖片時如何處理：[填入]
+- 按鈕顯示條件與連結去向：[填入]
+- 項目允許筆數及 0 筆時的處理：[填入]
+- 長標題、長說明如何換行或截斷：[填入]
+沒有寫明的規則列為待確認，不自行決定隱藏內容、加入預設圖或新增欄位。
+
+【響應式與互動】
+- 在 1440px、768px、380px 三種寬度分別檢查，並確認尺寸之間能自然調整；這三個確認寬度不是直接套用的 CSS 斷點。
+- Figma 已提供對應尺寸畫面時，依稿實作。未提供的尺寸依已確認規則製作預覽，標明推定部分並交設計確認，不當成已定稿設計。
+- 稿中未說明的欄數、順序、裁切或操作方式，先列為待確認；不擅自補成新的設計。
+- 不因設計稿只示範固定筆數，就把清單寫成只能顯示該筆數的結構。
+- 操作狀態依稿與補充說明呈現，重要資訊不可只靠滑鼠移入取得。
+
+【交付與開發接入】
+- 清楚標示區塊、重複項目、欄位與互動用途，不自行加入平台專用語法或標記。
+- 後台資料、正式表單送出、搜尋、登入、付款及平台架構轉換由開發端處理。
+- 如需 JS 展示互動，先確認 demo 範圍，不擅自加入套件、第三方服務或正式功能。
+- 附上與 Figma 的差異、三種寬度的檢查結果、待確認事項與需開發接入的項目。
+
+Figma 與補充規則有衝突時，指出位置並確認，不自行選擇其中一方。</pre><p class="status" id="prompt-module-status" role="status" aria-live="polite"></p>
+<h3>提示詞三：請 AI 檢查轉碼結果</h3><pre class="prompt">請對照原設計與已確認 UI 規則，檢查這份 HTML／CSS。
+逐項檢查：視覺還原、欄位對應、必填缺漏、選填顯示、長文字、缺圖、資料筆數、品牌色、1440px／768px／380px 三種寬度與尺寸間變化、互動狀態及連結去向。
+回報具體位置、問題、影響與建議修正。區分已實測與僅依程式判讀，不把尚未接入的系統功能標為完成；未定的設計決策先列問題，不直接改動。</pre></section>
+
+
+
+
+<footer class="footer">官網設計協作與 UI 交付規範 · 討論版 v0.3 · 2026.10.21</footer>
+</main></div>
+<script>
+
+document.querySelectorAll('[data-copy]').forEach(button=>{
+  button.addEventListener('click',async()=>{
+    const id=button.dataset.copy;
+    const content=document.getElementById(id).textContent;
+    const status=document.getElementById(id+'-status');
+    try{
+      if(navigator.clipboard&&window.isSecureContext){await navigator.clipboard.writeText(content);}
+      else{
+        const area=document.createElement('textarea'); area.value=content;
+        area.setAttribute('aria-label','複製提示詞用的暫存文字');
+        area.style.position='fixed';area.style.opacity='0';document.body.appendChild(area);
+        area.select();const ok=document.execCommand('copy');area.remove();
+        if(!ok)throw new Error('copy unavailable');button.focus();
+      }
+      status.textContent='已複製，請先填入本案資料再使用。';
+    }catch(error){status.textContent='此瀏覽器不允許自動複製，請直接選取上方文字複製。';}
+  });
+});
+</script>
+</body>
+</html>
